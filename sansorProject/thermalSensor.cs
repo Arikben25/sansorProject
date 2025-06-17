@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace sansorProject
 {
-    internal class Program
+    internal class ThermalSensor : Sensors 
     {
-        static void Main(string[] args)
-        {
-            Agent mi = new Agent("rer",rankLevel.junior);
-        }
+        string name { get; set; }
+
+        internal ThermalSensor() : base("termi") { this.name = "termi"; }
     }
 }
