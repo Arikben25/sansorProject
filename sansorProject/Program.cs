@@ -10,7 +10,9 @@ namespace sansorProject
     {
         static void Main(string[] args)
         {
-            Agent mi = new Agent("rer",rankLevel.junior);
+            Manager manager = new Manager();
+            manager.enterSensor();
+          
         }
     }
 }
