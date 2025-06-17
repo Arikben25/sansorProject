@@ -13,19 +13,20 @@ namespace sansorProject
         map = 4,
         senior = 5
     }
-    
+
     internal class Agent
     {
         string name { get; set; }
         rankLevel level { get; set; }
         string[] weaknesses { get; set; }
         string[] allSensors { get; set; }
+        List<string> attached { get; set; } = new List<string>();
         //Sensors[] allSensors { get; set; }
 
 
 
 
-        internal Agent(string name, rankLevel level)
+        internal Agent()
         {
             this.name = name;
             this.level = level;
@@ -38,11 +39,11 @@ namespace sansorProject
 
 
         Random rand = new Random();
-        
+
         internal string[] setWeaknessesSensor()
         {
-            
-            string[] sensors = new string[(int)rankLevel.junior]; 
+
+            string[] sensors = new string[(int)rankLevel.junior];
             for (int i = 0; i < (int)rankLevel.junior; i++)
             {
                 int index = rand.Next((int)rankLevel.junior);
@@ -50,9 +51,10 @@ namespace sansorProject
             }
             return sensors;
         }
-
-
-
+        internal void addSensor(string sensorName)
+        {
+            attached.Add(sensorName);
+        }
 
     }
 }
