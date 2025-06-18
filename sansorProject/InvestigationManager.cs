@@ -14,6 +14,10 @@ namespace sansorProject
             rankLevel level = agrntLevel();
             List<string> sensors = enterSensor();
             Agent agent = new Agent(level,sensors);
+
+            Dictionary<string,int> weaknesses = arr_sensor_to_dict(agent);
+            compars_sensor(weaknesses, sensors);
+
         }
         internal List<string> enterSensor()
         {
@@ -63,5 +67,45 @@ Console.WriteLine("Select agent level,\r\nfor junior press 1,\r\nfor mac press 2
             return leveli;
         }
 
+        internal Dictionary<string,int> arr_sensor_to_dict(Agent agent)
+        {
+            string[] arrWeaknesses = agent.weaknesses;
+            Dictionary<string, int> weaknesses = new Dictionary<string, int>();
+            foreach(var sensor in arrWeaknesses)
+            {
+                if (weaknesses.ContainsKey(sensor))
+                {
+                    weaknesses[sensor]++;
+                }
+                else { weaknesses[sensor] = 1; }
+            }
+            return weaknesses;
+        }
+
+        internal void compars_sensor(Dictionary<string,int> weaknesses , List<string> sensors)
+        {
+            int sum_sensors = weaknesses.Values.Sum();
+            int count = 0;
+            foreach (string sensor in sensors)
+            {
+                if (weaknesses.ContainsKey(sensor) && weaknesses[sensor] > 0)
+                {
+                    weaknesses[sensor]--;
+                    count++;
+                }
+            }
+            if (count< sum_sensors) 
+            {
+                Console.WriteLine($"You have succeeded {count}/{sum_sensors} \r\n try again");
+                List<string> sensorsi = enterSensor();
+                compars_sensor(weaknesses, sensorsi);
+
+            }
+            else
+            {
+                Console.WriteLine($"You have succeeded {count}/{sum_sensors} \r\n all due respect");
+            }
+
+        }
     }
 }
