@@ -18,20 +18,20 @@ namespace sansorProject
     {
         string name { get; set; }
         rankLevel level { get; set; }
-        string[] weaknesses { get; set; }
+        internal string[] weaknesses { get; set; }
         string[] allSensors { get; set; }
-        List<string> attached { get; set; } = new List<string>();
+        List<string> attached { get; set; }  
         //Sensors[] allSensors { get; set; }
 
 
 
 
-        internal Agent()
+        internal Agent(rankLevel level, List<string> sensors)
         {
             this.name = name;
             this.level = level;
             this.allSensors = new string[] { "mooving", "termi" };
-
+            this.attached = new List<string>(sensors);
             this.weaknesses = setWeaknessesSensor();
             //this.allSensors = new Sensors [] { new MovementSensor(),new ThermalSensor() };
 
